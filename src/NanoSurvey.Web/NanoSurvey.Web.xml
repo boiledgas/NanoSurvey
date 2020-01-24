@@ -64,46 +64,33 @@
             Контроллер апи для работы с вопросами анкеты.
             </summary>
         </member>
-        <member name="M:NanoSurvey.Web.QuestionController.#ctor(NanoSurvey.DB.SurveyContext,NanoSurvey.DB.ResultContext,System.Func{NanoSurvey.DB.Survey})">
-            <summary>
-            
-            </summary>
+        <member name="M:NanoSurvey.Web.QuestionController.#ctor(NanoSurvey.DB.SurveyContext,System.Func{NanoSurvey.DB.SurveyContext},System.Func{NanoSurvey.DB.Survey})">
             <param name="surveyContext">Контекст БД для получения информации по анкете.</param>
             <param name="resultContext">Контекст БД для работы с ответами на вопросы анкеты.</param>
             <param name="defaultSurveyGetter"></param>
         </member>
-        <member name="M:NanoSurvey.Web.QuestionController.GetQuestion(System.Nullable{System.Int64},System.Nullable{System.Guid})">
+        <member name="M:NanoSurvey.Web.QuestionController.GetQuestion(System.Nullable{System.Int64})">
             <summary>
             Получение вопроса по идентификатору. 
             Если идентификатор не передан, возвращается первый вопрос актуальной анкеты.
-            Актуальная анкета меняется каждые 2 минуты.
+            Актуальная анкета выбирается случайным образом.
             </summary>
             <param name="id">Идентификатор вопроса интервью. </param>
-            <param name="surveyId">Идентификато опроса.</param>
             <returns>Вопрос анкеты с вариантами ответов.</returns>
             <response code="200">Возвращает вопрос анкеты с вариантами ответов.</response>
             <response code="404">Не найден вопрос анкеты с указанным идентификатором.</response>
         </member>
-        <member name="M:NanoSurvey.Web.QuestionController.SetResult(System.Collections.Generic.IList{System.Guid},System.Nullable{System.Int64},System.Nullable{System.Guid})">
+        <member name="M:NanoSurvey.Web.QuestionController.SetResult(System.Collections.Generic.IList{System.Guid},System.Nullable{System.Int64})">
             <summary>
             Сохранение ответов на вопрос анкеты.
             POST - потому что выполняется только добавление ответов анкеты.
             </summary>
             <param name="id">Идентификатор вопроса интервью. Если не передан, используется первый вопрос актуальной анкеты.</param>
-            <param name="surveyId">Идентификато опроса.</param>
             <param name="answers">Выбранные ответы.</param>
             <returns></returns>
             <response code="200">Возвращает идентификатор следующего вопроса.</response>
             <response code="400">Не верно указаны входные параметры.</response>
             <response code="404">Не найден вопрос анкеты с указанным идентификатором.</response>
-        </member>
-        <member name="M:NanoSurvey.Web.QuestionController.GetSurveyQuestion(System.Nullable{System.Guid},NanoSurvey.DB.Result)">
-            <summary>
-            Получение вопроса анкеты.
-            </summary>
-            <param name="surveyId">Идентификатор анкеты.</param>
-            <param name="result">Незаполненный результат.</param>
-            <returns></returns>
         </member>
         <member name="T:NanoSurvey.Web.Startup">
             <summary>

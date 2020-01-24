@@ -17,6 +17,9 @@ namespace NanoSurvey.DB
         public Guid ExternalId { get; set; }
         public Guid SurveyId { get; set; }
 
+        [ForeignKey("SurveyId")]
+        [InverseProperty("Interview")]
+        public virtual Survey Survey { get; set; }
         [InverseProperty("Interview")]
         public virtual ICollection<Result> Result { get; set; }
     }

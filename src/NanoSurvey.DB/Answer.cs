@@ -10,6 +10,7 @@ namespace NanoSurvey.DB
     {
         public Answer()
         {
+            ResultAnswer = new HashSet<ResultAnswer>();
             SurveyQuestionAnswer = new HashSet<SurveyQuestionAnswer>();
         }
 
@@ -18,6 +19,8 @@ namespace NanoSurvey.DB
         [StringLength(255)]
         public string Title { get; set; }
 
+        [InverseProperty("Answer")]
+        public virtual ICollection<ResultAnswer> ResultAnswer { get; set; }
         [InverseProperty("Answer")]
         public virtual ICollection<SurveyQuestionAnswer> SurveyQuestionAnswer { get; set; }
     }

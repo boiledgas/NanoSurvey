@@ -12,6 +12,9 @@ namespace NanoSurvey.DB
         public long ResultId { get; set; }
         public Guid AnswerId { get; set; }
 
+        [ForeignKey("AnswerId")]
+        [InverseProperty("ResultAnswer")]
+        public virtual Answer Answer { get; set; }
         [ForeignKey("ResultId")]
         [InverseProperty("ResultAnswer")]
         public virtual Result Result { get; set; }

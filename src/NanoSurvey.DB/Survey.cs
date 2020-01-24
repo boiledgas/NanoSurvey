@@ -10,15 +10,19 @@ namespace NanoSurvey.DB
     {
         public Survey()
         {
+            Interview = new HashSet<Interview>();
             SurveyQuestion = new HashSet<SurveyQuestion>();
             SurveyQuestionAnswer = new HashSet<SurveyQuestionAnswer>();
         }
 
         public Guid Id { get; set; }
         [Required]
+        [Column("NAME")]
         [StringLength(255)]
         public string Name { get; set; }
 
+        [InverseProperty("Survey")]
+        public virtual ICollection<Interview> Interview { get; set; }
         [InverseProperty("Survey")]
         public virtual ICollection<SurveyQuestion> SurveyQuestion { get; set; }
         [InverseProperty("Survey")]

@@ -30,7 +30,9 @@ CREATE TABLE survey.SurveyQuestion (
 	,QuestionId UNIQUEIDENTIFIER NOT NULL CONSTRAINT FK_survey_SurveyQuestion_QuestionId FOREIGN KEY REFERENCES survey.Question(id)
 	,NextQuestionId UNIQUEIDENTIFIER NULL CONSTRAINT FK_survey_SurveyQuestionRoute_NextQuestionId FOREIGN KEY REFERENCES survey.Question(id)
 	,PreviousQuestionId UNIQUEIDENTIFIER NULL CONSTRAINT FK_survey_SurveyQuestionRoute_PreviousQuestionId FOREIGN KEY REFERENCES survey.Question(id)
-	,Count INT NOT NULL INDEX IX_SurveyQuestion_SurveyId NONCLUSTERED (SurveyId)
+	,Count INT NOT NULL 
+	
+	INDEX IX_SurveyQuestion_SurveyId NONCLUSTERED (SurveyId)
 	)
 GO
 
@@ -40,7 +42,9 @@ CREATE TABLE survey.SurveyQuestionAnswer (
 	,SurveyId UNIQUEIDENTIFIER NOT NULL CONSTRAINT FK_survey_SurveyQuestionAnswer_SurveyId FOREIGN KEY REFERENCES survey.Survey(id)
 	,QuestionId UNIQUEIDENTIFIER NOT NULL CONSTRAINT FK_survey_SurveyQuestionAnswer_QuestionId FOREIGN KEY REFERENCES survey.Question(id)
 	,AnswerId UNIQUEIDENTIFIER NOT NULL CONSTRAINT FK_survey_SurveyQuestionAnswer_AnswerId FOREIGN KEY REFERENCES survey.Answer(id)
-	,OrderNum INT NOT NULL INDEX IX_SurveyQuestionAnswer_QuestionId NONCLUSTERED (SurveyId)
+	,OrderNum INT NOT NULL 
+	
+	INDEX IX_SurveyQuestionAnswer_QuestionId NONCLUSTERED (SurveyId)
 	)
 GO
 

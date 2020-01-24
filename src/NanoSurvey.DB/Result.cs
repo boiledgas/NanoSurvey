@@ -20,6 +20,9 @@ namespace NanoSurvey.DB
         [ForeignKey("InterviewId")]
         [InverseProperty("Result")]
         public virtual Interview Interview { get; set; }
+        [ForeignKey("QuestionId")]
+        [InverseProperty("Result")]
+        public virtual Question Question { get; set; }
         [InverseProperty("Result")]
         public virtual ICollection<ResultAnswer> ResultAnswer { get; set; }
     }

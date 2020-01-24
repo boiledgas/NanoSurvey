@@ -20,7 +20,7 @@ ___
 - Можно запустить docker-start-sql.bat для загрузки БД с тестовыми данными для этого нужен docker
 - Если использовать свой SQL Server инициализировать БД нужно вручную скрипт /sql/setup.sql
 3. Перед первым запуском отладчика нужно запустить в директории *src* из cmd
-	updateDbContext.bat "Server=.\;Database=DB;Integrated Security=SSPI;User Id=sa;Password=1qaz@WSX"
+	updateDbContext.bat "Server=.\;Database=NanoSurveyDB;User Id=sa;Password=1qaz@WSX"
   
 ___
 

@@ -39,10 +39,14 @@ namespace NanoSurvey.Web
 					.UseSqlServer(_configuration.GetConnectionString("NanoSurvey"))
 					.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking)
 			);
-			services.AddDbContext<ResultContext>(builder =>
-				builder
+			services.AddSingleton(c => {
+				var options = new DbContextOptionsBuilder<SurveyContext>()
 					.UseSqlServer(_configuration.GetConnectionString("NanoSurvey"))
-			);
+					.Options;
+
+				Func<SurveyContext> factory = () => new SurveyContext(options);
+				return factory;
+			});
 			services.AddSingleton(c =>
 			{
 				var context = c.GetService<SurveyContext>();
@@ -54,8 +58,8 @@ namespace NanoSurvey.Web
 					.OrderBy(s => s.Id)
 					.FirstOrDefault();
 
-				Func<Survey> closure = () => survey;
-				return closure;
+				Func<Survey> factory = () => survey;
+				return factory;
 			});
 
 			services

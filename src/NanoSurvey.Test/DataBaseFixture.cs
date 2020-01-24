@@ -5,14 +5,29 @@ using System;
 
 namespace NanoSurvey.Test
 {
+	public class TestSurveyContext : SurveyContext
+	{
+		public TestSurveyContext(DbContextOptions<SurveyContext> options) : base(options)
+		{
+		}
+
+		public override void Dispose()
+		{
+		}
+
+		public void TestDispose()
+		{
+			base.Dispose();
+		}
+	}
+
 	public class DataBaseFixture : IDisposable
 	{
-		public SurveyContext Survey { get; }
-		public ResultContext Results { get; }
-
+		readonly TestSurveyContext _context;
+		public SurveyContext Survey => _context;
 		public DataBaseFixture()
 		{
-			Survey = new SurveyContext(
+			_context = new TestSurveyContext(
 				new DbContextOptionsBuilder<SurveyContext>()
 					.UseInMemoryDatabase("NanoSurvey")
 					.Options);
@@ -25,17 +40,11 @@ namespace NanoSurvey.Test
 			Survey.AddRange(data.SurveyQuestionAnswers);
 
 			Survey.SaveChanges();
-
-			Results = new ResultContext(
-				new DbContextOptionsBuilder<ResultContext>()
-					.UseInMemoryDatabase("NanoSurvey")
-					.Options);
 		}
 
 		public void Dispose()
 		{
-			Survey.Dispose();
-			Results.Dispose();
+			_context.TestDispose();
 		}
 	}
 }

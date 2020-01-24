@@ -11,7 +11,7 @@ docker-compose up -d
 if exist .init (
     timeout /t 5
 ) else (
-    timeout /t 30
+    timeout /t 60
 	touch .init
 )
 

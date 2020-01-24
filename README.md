@@ -29,6 +29,6 @@ ___
 	NanoSurvey.Web - веб-приложение апи
 # Стек
 - aspnet core 2.2
-- entity framework 2.2
+- entity framework core 2.2
 - xunit 2.4
 - docker 

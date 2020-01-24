@@ -1,5 +1,6 @@
 #!/bin/bash
 
+
 if [ "$1" = '/opt/mssql/bin/sqlservr' ]; then
   if [ ! -f /tmp/app-initialized ]; then
     function initialize_app_database() {

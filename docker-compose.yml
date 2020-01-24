@@ -1,0 +1,28 @@
+version: "3.7"
+services:
+    webapi:
+        build: 
+            context: .
+            dockerfile: DockerFile.webapi
+            args:
+                SQL_SERVER: sqlserver
+                SQL_DATABASE: ${DATABASE_NAME}
+                SQL_PASSWORD: ${SA_PASSWORD}
+        image: nanosurvey:webapi
+        container_name: nanosurvey_webapi
+        ports:
+            - "${API_PORT}:50500"
+        depends_on:
+            - sqlserver
+    sqlserver:
+        build: 
+            context: .
+            dockerfile: DockerFile.sqlserver
+            args:
+                SQL_DATABASE: ${DATABASE_NAME}
+                SQL_PASSWORD: ${SA_PASSWORD}
+        image: nanosurvey:sqlserver
+        container_name: nanosurvey_sqlserver
+        user: root
+        ports:
+            - "${SQLSERVER_PORT}:1433"

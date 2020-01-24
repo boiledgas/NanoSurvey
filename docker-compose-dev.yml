@@ -1,0 +1,14 @@
+version: "3.7"
+services:
+    sqlserver:
+        build: 
+            context: .
+            dockerfile: DockerFile.sqlserver
+            args:
+                SQL_DATABASE: ${DATABASE_NAME}
+                SQL_PASSWORD: ${SA_PASSWORD}
+        image: nanosurvey:sqlserver
+        container_name: nanosurvey_sqlserver
+        user: root
+        ports:
+            - "${SQLSERVER_PORT}:1433"

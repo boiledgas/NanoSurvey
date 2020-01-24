@@ -1,0 +1,26 @@
+FROM mcr.microsoft.com/dotnet/core/sdk:2.2-stretch AS build
+
+WORKDIR /home
+COPY src/NanoSurvey.Generator NanoSurvey.Generator
+COPY src/NanoSurvey.DB NanoSurvey.DB
+
+WORKDIR NanoSurvey.Generator
+RUN dotnet publish -f netcoreapp2.2 -c Release -r ubuntu.16.04-x64 -o ../publish
+
+FROM mcr.microsoft.com/mssql/server:2019-GA-ubuntu-16.04
+
+ARG SQL_SERVER=localhost
+ARG SQL_DATABASE=NanoSurvey
+ARG SQL_USER=sa
+ARG SQL_PASSWORD=default
+
+ENV ACCEPT_EULA=Y
+ENV SQL_DATABASE=$SQL_DATABASE
+ENV SA_PASSWORD=$SQL_PASSWORD
+ENV ConnectionStrings__NanoSurvey="Data Source=$SQL_SERVER;Initial Catalog=$SQL_DATABASE;User ID=$SQL_USER;Password=$SQL_PASSWORD;"
+
+COPY --from=build /home/publish /home
+COPY sql /home
+
+ENTRYPOINT [ "/bin/bash", "/home/sql.sh" ]
+CMD [ "/opt/mssql/bin/sqlservr" ]

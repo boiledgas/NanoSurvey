@@ -1,0 +1,21 @@
+FROM mcr.microsoft.com/dotnet/core/sdk:2.2-stretch AS build
+
+WORKDIR /home
+COPY src/NanoSurvey.Web NanoSurvey.Web
+COPY src/NanoSurvey.DB NanoSurvey.DB
+
+WORKDIR NanoSurvey.Web
+RUN dotnet publish -f netcoreapp2.2 -c Release -o ../publish
+
+FROM mcr.microsoft.com/dotnet/core/runtime:2.2-stretch-slim AS runtime
+
+ARG SQL_SERVER=localhost
+ARG SQL_DATABASE=NanoSurvey
+ARG SQL_USER=sa
+ARG SQL_PASSWORD=default
+
+ENV ConnectionStrings__NanoSurvey="Data Source=$SQL_SERVER;Initial Catalog=$SQL_DATABASE;User ID=$SQL_USER;Password=$SQL_PASSWORD;"
+
+COPY --from=build /home/publish /home
+
+ENTRYPOINT [ "dotnet", "/home/NanoSurvey.Web.dll" ]

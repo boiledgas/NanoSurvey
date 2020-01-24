@@ -4,7 +4,7 @@
 if [ "$1" = '/opt/mssql/bin/sqlservr' ]; then
   if [ ! -f /tmp/app-initialized ]; then
     function initialize_app_database() {
-      sleep 15s
+      sleep 25s
 	  echo "Создаем БД ${SQL_DATABASE}"
 	  /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P ${SA_PASSWORD} -d master -Q "CREATE DATABASE ${SQL_DATABASE}"
       /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P ${SA_PASSWORD} -d ${SQL_DATABASE} -i /home/setup.sql

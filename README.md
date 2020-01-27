@@ -13,7 +13,7 @@
 ___
 
 # Разработка
-1. Необходимо установить [dotnet sdk 2.2.207](https://dotnet.microsoft.com/download/dotnet-core/2.2)
+1. Необходимо установить [dotnet sdk 2.1.803](https://dotnet.microsoft.com/download/dotnet-core/2.1)
 2. Настройка sql
 - Можно запустить docker-start-sql.bat для загрузки БД с тестовыми данными для этого нужен docker
 - Если использовать свой SQL Server инициализировать БД нужно вручную скрипт /sql/setup.sql
@@ -28,7 +28,7 @@ ___
 	NanoSurvey.Test - проект модульных тестов
 	NanoSurvey.Web - веб-приложение апи
 # Стек
-- aspnet core 2.2
+- aspnet core 2.1
 - entity framework core 2.2
 - xunit 2.4
 - docker 

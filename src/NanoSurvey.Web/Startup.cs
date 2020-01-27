@@ -62,6 +62,8 @@ namespace NanoSurvey.Web
 				return factory;
 			});
 
+			services.AddLogging();
+
 			services
 				.AddMvcCore()
 				.AddApiExplorer()

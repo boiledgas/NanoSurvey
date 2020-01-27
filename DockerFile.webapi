@@ -1,13 +1,13 @@
-FROM mcr.microsoft.com/dotnet/core/sdk:2.2-stretch AS build
+FROM mcr.microsoft.com/dotnet/core/sdk:2.1-stretch AS build
 
 WORKDIR /home
 COPY src/NanoSurvey.Web NanoSurvey.Web
 COPY src/NanoSurvey.DB NanoSurvey.DB
 
 WORKDIR NanoSurvey.Web
-RUN dotnet publish -f netcoreapp2.2 -c Release -o ../publish
+RUN dotnet publish -f netcoreapp2.1 -c Release -o ../publish
 
-FROM mcr.microsoft.com/dotnet/core/runtime:2.2-stretch-slim AS runtime
+FROM mcr.microsoft.com/dotnet/core/runtime:2.1-stretch-slim AS runtime
 
 ARG SQL_SERVER=localhost
 ARG SQL_DATABASE=NanoSurvey

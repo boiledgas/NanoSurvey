@@ -2,6 +2,7 @@
 using System.Net;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 
 namespace NanoSurvey.Web
 {
@@ -27,6 +28,11 @@ namespace NanoSurvey.Web
 				{
 					config.AddUserSecrets<Program>();
 				}
+			});
+			builder.ConfigureLogging(logging =>
+			{
+				logging.ClearProviders();
+				logging.AddConsole();
 			});
 			builder.UseStartup<Startup>();
 

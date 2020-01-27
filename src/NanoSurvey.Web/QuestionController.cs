@@ -187,7 +187,6 @@ namespace NanoSurvey.Web
 							QuestionId = question.NextQuestionId.Value
 						};
 						await context.Result.AddAsync(nextResult);
-
 					}
 
 					await context.SaveChangesAsync();
